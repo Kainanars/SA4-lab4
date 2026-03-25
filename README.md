@@ -25,7 +25,7 @@ lab4/
 └── README.md
 ```
 
-Commit da entrega: rodar `git rev-parse --short HEAD` antes de enviar.
+Commit da entrega: 1b50513
 
 ## Como rodar localmente
 
