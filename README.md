@@ -36,7 +36,7 @@ lab4/
 ### 1. Clonar o repositório
 
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/Kainanars/SA4-lab4.git
 cd lab4
 ```
 
