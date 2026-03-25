@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/dev.js"
+    "dev": "node scripts/dev.js",
+    "start": "node scripts/dev.js",
+    "test": "node -e \"fetch('http://localhost:' + (process.env.PORT || 3000) + '/api/health').then(r => r.json()).then(console.log).catch(e => { console.error(e.message); process.exit(1); })\""
   },
   "dependencies": {
     "express": "^4.18.2"

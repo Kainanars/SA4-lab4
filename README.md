@@ -1,180 +1,119 @@
-# LAB4 - 12 fatores
+# LAB4 - 12Fatores
 
-Serviço HTTP desenvolvido seguindo a metodologia Twelve-Factor App, com deploy utilizando Vercel.
+Este repositório é a entrega do Lab 4. A proposta foi montar um serviço HTTP pequeno, mas já com práticas de Doze‑Fatores desde o começo.
 
----
+## Resumo do projeto
 
-## Overview
+- Repositório: https://github.com/Kainanars/SA4-lab4
+- Linguagem: JavaScript
+- Framework: Express
+- Deploy: Vercel
 
-Este projeto demonstra uma API simples com endpoint `/api/health`, construída desde o início com base nos princípios dos 12 Fatores, incluindo:
+Estrutura principal:
 
-- Configuração via variáveis de ambiente
-- Processos stateless (sem estado)
-- Dependências explícitas
-- Logs em stdout
-- Desligamento gracioso (ambiente local)
-
----
-
-## Project Structure
-
-```
+```text
 lab4/
 ├── api/
 │   └── health.js
 ├── scripts/
 │   └── dev.js
+├── docs/
 ├── .env.example
-├── package.json
-├── README.md
 ├── .gitignore
-└── LICENSE
+├── LICENSE
+├── package.json
+└── README.md
 ```
 
-## Como Executar
+Commit da entrega: rodar `git rev-parse --short HEAD` antes de enviar.
 
-### 1. Clonar o repositório
+## Como rodar localmente
 
 ```bash
 git clone https://github.com/Kainanars/SA4-lab4.git
 cd lab4
-```
-
----
-
-### 2. Configurar variáveis de ambiente
-
-```bash
-cp .env.example .env
-```
-
----
-
-### 3. Instalar dependências
-
-```bash
 npm install
-```
-
----
-
-### 4. Rodar localmente
-
-```bash
+cp .env.example .env
 npm run dev
 ```
 
----
-
-### 5. Testar o endpoint
+Teste do endpoint:
 
 ```bash
 curl http://localhost:3000/api/health
 ```
 
-### Resposta esperada
+Exemplo de resposta:
 
 ```json
 {
   "status": "ok",
-  "uptime": 12.34,
-  "timestamp": "2026-03-25T12:00:00.000Z"
+  "uptime": 31.5439309,
+  "app": "lab4-service",
+  "timestamp": "2026-03-25T16:49:04.502Z"
 }
 ```
 
----
+Deploy publicado:
 
-## Deploy
+- https://sa-4-lab4.vercel.app/api/health
 
-A aplicação é implantada utilizando a plataforma **Vercel**, que utiliza arquitetura serverless.
+Evidências:
 
-Após o deploy, o endpoint estará disponível em:
+- ![Health endpoint](docs/image.png)
+- ![Vercel logs](docs/vercel-logs.png)
 
-```
-https://seu-projeto.vercel.app/api/health
-```
+## Mapeamento dos fatores
 
----
+| Fator                  | Implementação                                          | Evidência                           |
+| ---------------------- | ------------------------------------------------------ | ----------------------------------- |
+| I. Codebase            | Repositório único versionado                           | GitHub                              |
+| II. Dependencies       | Dependências declaradas explicitamente                 | package.json                        |
+| III. Config            | Configuração por variáveis de ambiente                 | .env.example                        |
+| IV. Backing Services   | Serviço externo definido por env                       | BACKING_SERVICE_URL em .env.example |
+| V. Build, Release, Run | Scripts separados para executar local e release/deploy | package.json                        |
+| VI. Processes          | Processo sem estado de sessão                          | api/health.js                       |
+| VII. Port Binding      | Porta lida de PORT                                     | scripts/dev.js                      |
+| VIII. Concurrency      | Escala por instâncias serverless                       | Vercel                              |
+| IX. Disposability      | Shutdown gracefull para sinais                         | scripts/dev.js                      |
+| X. Dev/Prod Parity     | Mesmo código, variando por env                         | api/health.js e scripts/dev.js      |
+| XI. Logs               | Logs estruturados no stdout                            | api/health.js e scripts/dev.js      |
+| XII. Admin Processes   | Processo administrativo one-off                        | npm run test                        |
 
-## Mapeamento dos Doze-Fatores
+Observação:
 
-| Fator             | Implementação                   | Referência       |
-| ----------------- | ------------------------------- | ---------------- |
-| Codebase          | Repositório único               | GitHub           |
-| Dependencies      | Declaradas explicitamente       | `package.json`   |
-| Config            | Variáveis de ambiente           | `.env.example`   |
-| Backing Services  | Configuração via env            | `.env`           |
-| Build/Release/Run | Gerenciado pela plataforma      | Vercel           |
-| Processes         | Funções stateless               | `api/health.js`  |
-| Port Binding      | Abstraído pela plataforma       | N/A              |
-| Concurrency       | Escalabilidade automática       | Vercel           |
-| Disposability     | Execução efêmera                | Vercel           |
-| Dev/Prod Parity   | Mesmo código em ambos ambientes | `scripts/dev.js` |
-| Logs              | stdout com `console.log`        | `health.js`      |
-| Admin Processes   | Script local                    | `scripts/dev.js` |
+- Não deixamos praticamente nenhum fator fora do escopo. Alguns pontos (como concorrência) são resolvidos pela infraestrutura do Vercel.
 
----
+## Scripts e variáveis de ambiente
 
-## Observação sobre Port Binding
+Scripts principais:
 
-Em aplicações tradicionais, o serviço faz bind em uma porta definida por variável de ambiente. No entanto, em ambientes serverless isso é abstraído pela plataforma.
+- `npm run dev`
+- `npm run start`
+- `npm run test`
 
-> Mesmo assim, a aplicação mantém aderência aos princípios de configuração via ambiente e processos stateless definidos pelos Doze-Fatores.
+Variáveis em `.env.example`:
 
----
+- `PORT`
+- `NODE_ENV`
+- `APP_NAME`
+- `BACKING_SERVICE_URL`
 
-## Observabilidade e Descartabilidade
+## Colaboração com IA e reflexão
 
-- Logs são enviados para **stdout**
-- Endpoint `/api/health` fornece status da aplicação
-- Ambiente local implementa **shutdown graceful (SIGTERM)**
+Prompts que mais ajudaram:
 
----
+- Como criar uma API simples com um enpoint /health
+- Preciso adaptar esse projeto para arquiteura serverless com deploy na Vercel
+- Vou aplicar os Doze-Fatores nesse projeto, como garanto cada um dos fatores?
+- Como adicionar graceful shutdown
 
-## Colaboração com IA
+Decisões que fiz durante as iterações:
 
-### Prompts utilizados
+- Começamos com o Express tradicional e adaptamos para serverless por conta da infraestrutura do Vercel.
+- Separamos a execução local em (`scripts/dev.js`) e a de produção em (`api/health.js`).
+- Padronizamos os logs em JSON para facilitar leitura e evidência.
 
-- "Generate a minimal serverless API for Vercel with a /health endpoint"
-- "Adapt a Node.js Express app to serverless architecture"
-- "Apply Twelve-Factor App principles in a minimal project"
-- "Add graceful shutdown handling in Node.js"
+Reflexão final:
 
----
-
-### Iterações e decisões
-
-- Inicialmente foi criado um servidor Express tradicional
-- Foi necessário adaptar para arquitetura serverless
-- Separação entre ambiente local e produção
-- Inclusão de logs e tratamento de ciclo de vida
-
----
-
-## Reflexão
-
-O uso de IA acelerou significativamente a criação do scaffold inicial e ajudou a seguir os princípios dos 12 Fatores. No entanto, tivemos que fazer ajustes manuais, especialmente na adaptação para o modelo serverless da Vercel.
-
-Esse processo contribuiu para um melhor entendimento de:
-
-- Arquitetura stateless
-- Configuração baseada em ambiente
-- Abstrações de infraestrutura
-
-### Próximos passos
-
-- Implementar logs estruturados (JSON)
-- Adicionar monitoramento e observabilidade
-- Criar pipeline de CI/CD
-
----
-
-## Checklist Final
-
-- [x] Endpoint `/api/health` funcionando
-- [x] Variáveis de ambiente configuradas
-- [x] Logs em stdout
-- [x] Arquitetura stateless
-- [x] Desligamento gracioso (local)
-- [x] Mapeamento dos Doze-Fatores
-- [x] Documentação de uso de IA
+A IA ajudou bastante a acelerar o scaffold, mas os ajustes que fizemos fez diferença para acompanhar os 12 fatores com clareza. O principal aprendizado foi traduzir os fatores para evidências concretas em código e execução. A estrutura do projeto ficou simples, mas já com boas práticas para escalar e manter. O deploy na Vercel facilitou a parte de concorrência e infraestrutura, permitindo focar mais na aplicação em si.
