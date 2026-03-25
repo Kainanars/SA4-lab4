@@ -117,3 +117,4 @@ Decisões que fiz durante as iterações:
 Reflexão final:
 
 A IA ajudou bastante a acelerar o scaffold, mas os ajustes que fizemos fez diferença para acompanhar os 12 fatores com clareza. O principal aprendizado foi traduzir os fatores para evidências concretas em código e execução. A estrutura do projeto ficou simples, mas já com boas práticas para escalar e manter. O deploy na Vercel facilitou a parte de concorrência e infraestrutura, permitindo focar mais na aplicação em si.
+Para adequar ainda mais nosso projeto aos Doze-Fatores, os proximos passos são implementar testes automatizados, adicionar monitoramento e alertas, e explorar mais o uso de backing services para funcionalidades adicionais.
