@@ -108,7 +108,7 @@ Prompts que mais ajudaram:
 - Vou aplicar os Doze-Fatores nesse projeto, como garanto cada um dos fatores?
 - Como adicionar graceful shutdown
 
-Decisões que fiz durante as iterações:
+Decisões que fizemos durante as iterações:
 
 - Começamos com o Express tradicional e adaptamos para serverless por conta da infraestrutura do Vercel.
 - Separamos a execução local em (`scripts/dev.js`) e a de produção em (`api/health.js`).
